@@ -10,16 +10,15 @@ import org.springframework.stereotype.Component;
  * Created by abraithwaite on 24/04/2014.
  */
 @Component
-public class RatePlansRates extends SpringRouteBuilder {
+public class TransformXml2Json extends SpringRouteBuilder {
     @Override
     public void configure() throws Exception {
-
         XmlJsonDataFormat xmlJsonDataFormat = new XmlJsonDataFormat();
         xmlJsonDataFormat.setForceTopLevelObject(true);
         xmlJsonDataFormat.setSkipNamespaces(false);
         xmlJsonDataFormat.setRemoveNamespacePrefixes(true);
 
-        from("file:files/RatePlansRates")
+        from("file:files/input")
                 .convertBodyTo(String.class)
                 .process(new Processor() {
                     @Override
@@ -43,6 +42,6 @@ public class RatePlansRates extends SpringRouteBuilder {
                         exchange.getIn().setBody(newBody);
                     }
                 })
-                .to("file:output/RatePlansRates");
+                .to("file:files/output");
     }
 }
