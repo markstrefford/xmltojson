@@ -23,7 +23,7 @@ public class TransformXml2Json extends SpringRouteBuilder {
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        String body = (String) exchange.getIn().getBody();
+                        String body = exchange.getIn().getBody(String.class);
                         String filename = exchange.getIn().getHeader("CamelFileName", String.class);
                         String newFilename = filename.replace(".xml", ".json");
 
@@ -37,7 +37,7 @@ public class TransformXml2Json extends SpringRouteBuilder {
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
-                        String body = (String) exchange.getIn().getBody();
+                        String body = exchange.getIn().getBody(String.class);
                         String newBody = body.replace("\"@", "\"");
                         exchange.getIn().setBody(newBody);
                     }
