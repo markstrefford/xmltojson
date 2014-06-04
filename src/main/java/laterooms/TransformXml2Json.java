@@ -27,7 +27,7 @@ public class TransformXml2Json extends SpringRouteBuilder {
                         String filename = exchange.getIn().getHeader("CamelFileName", String.class);
                         String newFilename = filename.replace(".xml", ".json");
 
-                        String newBody = body.substring(1);
+                        String newBody = body.substring(0);
                         exchange.getIn().setBody(newBody);
                         exchange.getIn().setHeader("CamelFileName", newFilename);
                     }
